@@ -3,11 +3,12 @@ import React from "react";
 import theme from "../../config/theme";
 import Slider from "../../components/Slider/Slider";
 import LinkTable from "../../components/LinkTable/LinkTable";
+import Statistics from "../../components/Statistics/Statistics";
 
 function main() {
   return (
     <Box padding={"12px"}>
-      <Stack width={"100%"} direction={"row"} spacing={"20px"}>
+      <Stack width={"100%"} direction={"row"} spacing={"20px"} marginBottom={'20px'}>
         {/* ======================================= Backend ishlatiladi */}
         <Stack
           bgcolor={theme.palette.primary.main}
@@ -79,6 +80,10 @@ function main() {
           </Typography>
         </Stack>
       </Stack>
+        <Stack direction={'row'} width={'100%'}  spacing={'1px'}>
+           <Statistics />
+           <Slider />
+        </Stack>
     </Box>
   );
 }

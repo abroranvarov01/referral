@@ -44,7 +44,7 @@ const Statistics = ({
         width={450}
         height={450}
         style={{
-          backgroundColor: "#1e1e1e",
+          // backgroundColor: "#1e1e1e",
           borderRadius: "10px",
         }}
       />

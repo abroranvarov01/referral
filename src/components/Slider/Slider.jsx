@@ -1,20 +1,20 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Box, IconButton, Button } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Box, IconButton, Button, Typography } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import CircleIcon from "@mui/icons-material/Circle";
 import { useSwipeable } from "react-swipeable";
+import img from "../../../public/sliderBg.jpg";
 
 const images = [
-  "https://via.placeholder.com/600x300?text=Image+1",
-  "https://via.placeholder.com/600x300?text=Image+2",
-  "https://via.placeholder.com/600x300?text=Image+3",
+  { src: img, text: "Это первое изображение слайдера" },
+  { src: img, text: "Второе изображение с описанием" },
 ];
 
 const Slider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [autoSlide, setAutoSlide] = useState(true);
-  const slideInterval = 3000; // 3 seconds
+  const slideInterval = 3000; // 3 секунды
 
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
@@ -28,7 +28,7 @@ const Slider = () => {
     setCurrentIndex(index);
   };
 
-  // Auto-slide functionality
+  // Автоматическая смена слайдов
   useEffect(() => {
     if (autoSlide) {
       const interval = setInterval(() => {
@@ -38,7 +38,7 @@ const Slider = () => {
     }
   }, [autoSlide, currentIndex]);
 
-  // Swipe handlers
+  // Свайп для мобильных устройств
   const handlers = useSwipeable({
     onSwipedLeft: handleNext,
     onSwipedRight: handlePrev,
@@ -49,17 +49,16 @@ const Slider = () => {
       sx={{
         position: "relative",
         width: "100%",
-        maxWidth: "800px",
-        height: "auto",
+        maxWidth: "1200px",
+        height: "400px",
         overflow: "hidden",
         margin: "auto",
         borderRadius: "10px",
         boxShadow: 3,
-        backgroundColor: "black",
       }}
       {...handlers}
     >
-      {/* Slides */}
+      {/* Слайды */}
       <Box
         sx={{
           display: "flex",
@@ -68,23 +67,45 @@ const Slider = () => {
           width: `${images.length * 100}%`,
         }}
       >
-        {images.map((src, index) => (
+        {images.map((image, index) => (
           <Box
             key={index}
-            component="img"
-            src={src}
-            alt={`Slide ${index + 1}`}
             sx={{
+              position: "relative",
               width: "100%",
               flexShrink: 0,
-              height: "300px",
-              objectFit: "cover",
+              height: "400px",
             }}
-          />
+          >
+            <Box
+              component="img"
+              src={image.src}
+              alt={`Слайд ${index + 1}`}
+              sx={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+            />
+            {/* Текст поверх изображения */}
+            <Typography
+              variant="h1"
+              sx={{
+                position: "absolute",
+                top: "30px",
+                left: "20px",
+                color: "white",
+                padding: "5px 10px",
+                borderRadius: "5px",
+              }}
+            >
+              {image.text}
+            </Typography>
+          </Box>
         ))}
       </Box>
 
-      {/* Navigation Arrows */}
+      {/* Кнопки навигации */}
       <IconButton
         onClick={handlePrev}
         sx={{
@@ -95,9 +116,9 @@ const Slider = () => {
           backgroundColor: "#EAB308",
           color: "white",
           zIndex: 2,
-          "&:hover": { backgroundColor: "#D4A207" }, // Slightly darker shade
+          "&:hover": { backgroundColor: "#D4A207" },
         }}
-        aria-label="Previous Slide"
+        aria-label="Предыдущий слайд"
       >
         <ArrowBackIosIcon />
       </IconButton>
@@ -111,14 +132,14 @@ const Slider = () => {
           backgroundColor: "#EAB308",
           color: "white",
           zIndex: 2,
-          "&:hover": { backgroundColor: "#D4A207" }, // Slightly darker shade
+          "&:hover": { backgroundColor: "#D4A207" },
         }}
-        aria-label="Next Slide"
+        aria-label="Следующий слайд"
       >
         <ArrowForwardIosIcon />
       </IconButton>
 
-      {/* Dots Navigation */}
+      {/* Точки навигации */}
       <Box
         sx={{
           position: "absolute",
@@ -143,12 +164,12 @@ const Slider = () => {
                 color: "#EAB308",
               },
             }}
-            aria-label={`Go to slide ${index + 1}`}
+            aria-label={`Перейти к слайду ${index + 1}`}
           />
         ))}
       </Box>
 
-      {/* Auto-Slide Toggle Button */}
+      {/* Кнопка автоматической смены слайдов */}
       <Button
         onClick={() => setAutoSlide(!autoSlide)}
         sx={{
@@ -157,10 +178,10 @@ const Slider = () => {
           right: "10px",
           backgroundColor: "#EAB308",
           color: "white",
-          "&:hover": { backgroundColor: "#D4A207" }, // Slightly darker shade
+          "&:hover": { backgroundColor: "#D4A207" },
         }}
       >
-        {autoSlide ? "Pause" : "Play"}
+        {autoSlide ? "Пауза" : "Запуск"}
       </Button>
     </Box>
   );
