@@ -3,7 +3,11 @@ import React from "react";
 import theme from "../../config/theme";
 import Slider from "../../components/Slider/Slider";
 import LinkTable from "../../components/LinkTable/LinkTable";
+<<<<<<< HEAD
 import Statistics from "../../components/Statistics/Statistics";
+=======
+import StatusTable from "../../components/StatusTable/StatusTable";
+>>>>>>> 035a3fdd0d4fd2b1cfdaf34d3e0ef61f46cf117b
 
 function main() {
   return (
@@ -80,10 +84,16 @@ function main() {
           </Typography>
         </Stack>
       </Stack>
+<<<<<<< HEAD
         <Stack direction={'row'} width={'100%'}  spacing={'1px'}>
            <Statistics />
            <Slider />
         </Stack>
+=======
+      <Box>
+        <StatusTable />
+      </Box>
+>>>>>>> 035a3fdd0d4fd2b1cfdaf34d3e0ef61f46cf117b
     </Box>
   );
 }
