@@ -3,6 +3,7 @@ import React from "react";
 import theme from "../../config/theme";
 import Slider from "../../components/Slider/Slider";
 import LinkTable from "../../components/LinkTable/LinkTable";
+import StatusTable from "../../components/StatusTable/StatusTable";
 
 function main() {
   return (
@@ -79,6 +80,9 @@ function main() {
           </Typography>
         </Stack>
       </Stack>
+      <Box>
+        <StatusTable />
+      </Box>
     </Box>
   );
 }
